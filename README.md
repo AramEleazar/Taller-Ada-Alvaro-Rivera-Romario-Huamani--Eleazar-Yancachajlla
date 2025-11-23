@@ -3,6 +3,7 @@
 **Estudiantes:**  
 - Romario Huamni Paccaya  
 - Aram Eleazar Yancachajlla Sucso  
+- Alvaro Nicolas Rivera Tarque
 
 ---
 
@@ -87,17 +88,70 @@ go test -v ./Ejercicio2
 ### 4. Casos de Prueba Incluidos
 Los tests en `main_test.go` validan dos escenarios principales:
 
-#### ✔️ Grafo con ciclo
+####  Grafo con ciclo
 Ejemplo: 1 → 2 → 3 → 1  
 Se valida:
 
 * Que se retorne `true`.  
 * Que se genere correctamente la lista de nodos del ciclo.
 
-#### ✔️ Grafo sin ciclo
+####  Grafo sin ciclo
 Ejemplo: grafo lineal.
 
 Se espera:
 
 * Retornar `false`.  
 * La lista de nodos debe ser `nil`.
+
+---
+---
+
+
+---
+
+## Ejercicio 4: Navegación GPS (Dijkstra Básico)
+
+### 1. Explicación del Enfoque
+El objetivo es encontrar la **ruta más corta** entre dos puntos de una ciudad, considerando que las calles tienen distintas longitudes (pesos).
+
+Para resolverlo, se modela la ciudad como un **grafo ponderado** e implementamos el algoritmo **Dijkstra** optimizado usando un **heap (priority queue)**:
+
+* **Grafo:** Se representa como `map[int]map[int]float64`, donde cada nodo es una intersección.
+* **Algoritmo:** Dijkstra selecciona siempre el nodo con la menor distancia acumulada gracias al heap.
+* **Ruta:** Se utiliza un mapa `prev[]` para reconstruir la ruta completa desde el destino hacia el origen.
+* **Datos:** El grafo puede ser construido con datos reales de un distrito de Lima (según el tutorial indicado).
+
+### 2. Análisis de Complejidad
+
+* **Temporal:**  
+  Usando priority queue, la complejidad es:  
+  **O((V + E) log V)**  
+  Por las operaciones de insertar y extraer elementos del heap.
+
+* **Espacial:**  
+  Se almacena el grafo, el arreglo de distancias, predecesores y el heap.  
+  Complejidad: **O(V + E)**.
+
+### 3. Instrucciones de Ejecución
+
+**Requisitos:**  
+Tener instalado Go y el grafo de prueba dentro de la carpeta `Ejercicio4`.
+
+**Comandos (desde la raíz del proyecto `taller-grafos/`):**
+
+```bash
+# Ejecutar el programa principal
+go run ./Ejercicio4/main.go
+
+# Ejecutar los tests unitarios
+go test -v ./Ejercicio4
+
+### 5. Pasos para ejecutar los casos de prueba
+
+Para validar el correcto funcionamiento del algoritmo, sigue estos pasos:
+
+1. Abre una terminal en la raíz del proyecto `taller-grafos/`.
+2. Ejecuta el siguiente comando para correr los tests del Ejercicio 4:
+
+```bash
+go test -v ./Ejercicio4

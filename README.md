@@ -105,7 +105,42 @@ Se espera:
 
 ---
 ---
+## Ejercicio 03: Red Eléctrica Óptima (MST por Kruskal)
 
+### 1. Enfoque y Algoritmo Aplicado
+
+El problema consiste en encontrar el *Árbol de Expansión Mínima (MST)* para conectar los N=4,941 edificios, buscando el costo total más bajo.
+
+1.  *Algoritmo Principal:* Se utilizó el *Algoritmo de Kruskal. Este es un enfoque *greedy que ordena todas las posibles conexiones por su costo y las añade al MST solo si no forman un ciclo.
+2.  *Lógica de Costo (Costo por Distancia Simulada):* Dado que el archivo de entrada (power-US-Grid.mtx) no contiene coordenadas geográficas, se implementó una *simulación de distancia* para asignar costos realistas:
+    * Se asignaron coordenadas (x, y) aleatorias a cada uno de los 4,941 nodos.
+    * El costo de cada arista se calcula usando la *Distancia Euclidiana* entre las coordenadas de los edificios. Este costo actúa como la "longitud" del cable.
+3.  *Detección de Ciclos:* Para la optimización, se implementó la estructura *Union-Find (DSU)* con las heurísticas de Path Compression y Union by Rank. Esto permite verificar y unir conjuntos de nodos en tiempo casi constante, asegurando que el MST no tenga ciclos.
+
+### 2. Complejidad Temporal y Espacial
+
+* *Complejidad Temporal:* $\mathbf{O(E \log E)}$
+    * Dominada por el paso de *ordenamiento* de las $E$ aristas (Merge Sort o Quick Sort).
+    * La operación de *Union-Find* es muy eficiente, con un tiempo amortizado casi constante $\mathbf{O(\alpha(V))}$ (donde $\alpha$ es la función inversa de Ackerman).
+* *Complejidad Espacial:* $\mathbf{O(V + E)}$
+    * Necesaria para almacenar las $E$ aristas y la estructura *Union-Find* (que requiere $V$ espacios para los arrays parent y rank).
+
+### 3. Instrucciones de Ejecución
+
+1.  Asegúrese de que el archivo de datos *power-US-Grid.mtx* se encuentre en la misma carpeta que main.go.
+2.  Navegue a la carpeta del ejercicio (ejercicio03/ en este caso).
+3.  Ejecute el programa usando el comando de Go:
+
+    bash
+    cd Ejercicio3
+    go run main.go
+    
+
+### 4. Casos de Prueba Incluidos
+
+* *Caso de Prueba Único (Salida de Consola):*
+    * El programa genera una salida que incluye: *Costo Total (Referencia), **Costo Total Mínimo (MST), y la lista de las **primeras 10 conexiones óptimas*.
+    * *Verificación:* La salida es válida si el Costo Mínimo es *significativamente menor* que el Costo Total de Referencia y si el número de conexiones del MST es *$N-1$* (4,940).
 
 ---
 
